@@ -1,5 +1,5 @@
 # capacity-fs 
-![GoDocs](https://godocs.io/github.com/lemondevxyz/capacityfs?status.svg)
+[![GoDocs](https://godocs.io/github.com/lemondevxyz/capacityfs?status.svg)]
 ![Coverage](https://img.shields.io/badge/Coverage-100.0%25-brightgreen)
 capacity-fs is a fixed-size filesystem abstraction for afero. It does not implement any interfaces; instead it peggy backs off of already existing filesystem implementations.
 
