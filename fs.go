@@ -149,6 +149,8 @@ func (a *capacityFs) beforeRemove(name string) (int64, error) {
 	return size, nil
 }
 
+// ci comment
+
 func (a *capacityFs) Remove(name string) error {
 	size, err := a.beforeRemove(name)
 	if err != nil {
