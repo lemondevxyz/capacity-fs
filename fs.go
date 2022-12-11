@@ -53,7 +53,7 @@ func (a *capacityFs) addCapacity(size int64) {
 // statAndCheckSize returns an error if the size of a file is more than
 // the limited size.
 //
-// This is only called on Create, Mkdir, MkdirAll.
+// This is only called on Create, Mkdir, MkdirAll and OpenFile.
 func (a *capacityFs) statAndCheckSize(name string) error {
 	stat, err := a.Fs.Stat(name)
 	if err == nil {
@@ -157,7 +157,11 @@ func (a *capacityFs) OpenFile(name string, flag int, perm os.FileMode) (afero.Fi
 		return nil, err
 	}
 
-	return &fileSize{fi, a.hasEnoughCapacity, a.addCapacity}, nil
+	fi, err = &fileSize{fi, a.hasEnoughCapacity, a.addCapacity}, a.statAndCheckSize(name)
+	if err != nil {
+		a.Fs.Remove(name)
+	}
+	return fi, err
 }
 
 // beforeRemove essentially returns the size of the file or the real
